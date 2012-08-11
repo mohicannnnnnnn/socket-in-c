@@ -1,0 +1,30 @@
+# -An makefile build tcp_echo_server4 
+all: tcp_echo_server4
+
+# which compiler
+CC = gcc
+
+#where to install
+INSTDIR = 
+
+#where are include files kept
+INCLUDE =
+
+#Options for development
+CFLAGS = -Wall -std=c99 -g
+
+tcp_echo_server4:	tcp_echo_server4.o tcp_server_utility.o practical.o
+	$(CC) $(CFLAGS) -o tcp_echo_server4 tcp_echo_server4.o tcp_server_utility.o practical.o
+
+tcp_echo_server4.o: tcp_echo_server4.c practical.h tcp_server_utility.h
+		$(CC) $(CFLAGS) -c  tcp_echo_server4.c practical.h tcp_server_utility.h
+
+tcp_server_utility.o: tcp_server_utility.c practical.h
+		$(CC) $(CFLAGS)  -c  tcp_server_utility.c 
+
+practical.o: practical.c practical.h
+		$(CC) $(CFLAGS)  -c  practical.c
+	
+clean:
+	-rm tcp_echo_server4.o tcp_server_utility.o practical.o
+
